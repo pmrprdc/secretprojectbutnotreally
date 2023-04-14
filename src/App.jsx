@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -7,6 +7,8 @@ function App() {
 
  const [leftDigit, setLeftDigit] = useState(0)
  const [rightDigit, setRightDigit] = useState(0)
+ const [age, setAge] = useState(null)
+ const [displayMessage, setDisplayMessage] = useState("")
  
   const buttons1 = [];
   const buttons2 = [];
@@ -34,12 +36,19 @@ function App() {
     })
   }
 
+  useEffect(()=>{
+    setAge((leftDigit + rightDigit))
+  },[leftDigit, rightDigit])
 
+  const submitHandler = () => {
+    const dayInAges = age*365;
+    setDisplayMessage(`You are ${dayInAges} days old!`)
 
-
+  }
   return (
     <div className="App">
       <h1>{leftDigit}{rightDigit}</h1>
+      <h1>{displayMessage}</h1>
       <h1>How old are you</h1>
       {buttons1.map(btn=>{
         return (<button onClick={buttonClickHandler} key={btn.key} value={btn.value}>{btn.name}</button>)
@@ -48,6 +57,8 @@ function App() {
       {buttons2.map(btn=>{
         return (<button onClick={buttonClickHandler}key={btn.key} value={btn.value}>{btn.name}</button>)
       })}
+
+      <button onClick={submitHandler}>Submit</button>
     </div>
   )
 }
