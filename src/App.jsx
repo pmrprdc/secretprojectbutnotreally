@@ -17,7 +17,7 @@ function App() {
     if(e.target.name === "0 to 9"){
 
       setLeftDigit(e.target.value)
-    } else if (e.target.value > 10) {
+    } else if (e.target.value >= 10) {
       setLeftDigit(e.target.value/10)
     } else if(e.target.value < 10) {
       setRightDigit(e.target.value)
@@ -70,7 +70,7 @@ function App() {
         return (<button onClick={buttonClickHandler} name ={ btn.name}key={btn.key} digit={btn.digit} value={btn.value}>{btn.name}</button>)
       })}
       <br></br>
-      {(leftDigit !==0 || rightDigit !==0) && age<10 && buttons2.map(btn=>{
+      {(leftDigit !==0 || rightDigit !==0) && (age<10 && displayMessage==="") && buttons2.map(btn=>{
         return (<button onClick={buttonClickHandler}key={btn.key} value={btn.value}>{btn.name}</button>)
       })}
  
