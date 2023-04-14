@@ -4,30 +4,50 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+ const [leftDigit, setLeftDigit] = useState(0)
+ const [rightDigit, setRightDigit] = useState(0)
+ 
+  const buttons1 = [];
+  const buttons2 = [];
+
+  function buttonClickHandler(e) {
+    if(e.target.value < 10) {
+      setRightDigit(e.target.value)
+    } else{
+      setLeftDigit(e.target.value/10)
+    }
+  }
+
+  for(let i=0; i<10; i++) {
+
+    buttons1.push({
+      name: `${i*10} to ${(i*10)+9}`,
+      value: i*10,
+      key: i
+    })
+
+    buttons2.push({
+      name: i,
+      value: i,
+      key: i
+    })
+  }
+
+
+
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>{leftDigit}{rightDigit}</h1>
+      <h1>How old are you</h1>
+      {buttons1.map(btn=>{
+        return (<button onClick={buttonClickHandler} key={btn.key} value={btn.value}>{btn.name}</button>)
+      })}
+      <br></br>
+      {buttons2.map(btn=>{
+        return (<button onClick={buttonClickHandler}key={btn.key} value={btn.value}>{btn.name}</button>)
+      })}
     </div>
   )
 }
